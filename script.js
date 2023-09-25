@@ -36,60 +36,65 @@ const account4 = {
 const accounts = [account1, account2, account3, account4];
 
 // Elements
-const labelWelcome = document.querySelector('.welcome');
-const labelDate = document.querySelector('.date');
-const labelBalance = document.querySelector('.balance__value');
-const labelSumIn = document.querySelector('.summary__value--in');
-const labelSumOut = document.querySelector('.summary__value--out');
-const labelSumInterest = document.querySelector('.summary__value--interest');
-const labelTimer = document.querySelector('.timer');
+// const labelWelcome = document.querySelector('.welcome');
+// const labelDate = document.querySelector('.date');
+// const labelBalance = document.querySelector('.balance__value');
+// const labelSumIn = document.querySelector('.summary__value--in');
+// const labelSumOut = document.querySelector('.summary__value--out');
+// const labelSumInterest = document.querySelector('.summary__value--interest');
+// const labelTimer = document.querySelector('.timer');
 
-const containerApp = document.querySelector('.app');
-const containerMovements = document.querySelector('.movements');
+// const containerApp = document.querySelector('.app');
+// const containerMovements = document.querySelector('.movements');
 
-const btnLogin = document.querySelector('.login__btn');
-const btnTransfer = document.querySelector('.form__btn--transfer');
-const btnLoan = document.querySelector('.form__btn--loan');
-const btnClose = document.querySelector('.form__btn--close');
-const btnSort = document.querySelector('.btn--sort');
+// const btnLogin = document.querySelector('.login__btn');
+// const btnTransfer = document.querySelector('.form__btn--transfer');
+// const btnLoan = document.querySelector('.form__btn--loan');
+// const btnClose = document.querySelector('.form__btn--close');
+// const btnSort = document.querySelector('.btn--sort');
 
-const inputLoginUsername = document.querySelector('.login__input--user');
-const inputLoginPin = document.querySelector('.login__input--pin');
-const inputTransferTo = document.querySelector('.form__input--to');
-const inputTransferAmount = document.querySelector('.form__input--amount');
-const inputLoanAmount = document.querySelector('.form__input--loan-amount');
-const inputCloseUsername = document.querySelector('.form__input--user');
-const inputClosePin = document.querySelector('.form__input--pin');
+// const inputLoginUsername = document.querySelector('.login__input--user');
+// const inputLoginPin = document.querySelector('.login__input--pin');
+// const inputTransferTo = document.querySelector('.form__input--to');
+// const inputTransferAmount = document.querySelector('.form__input--amount');
+// const inputLoanAmount = document.querySelector('.form__input--loan-amount');
+// const inputCloseUsername = document.querySelector('.form__input--user');
+// const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
-  containerMovements.innerHTML = '';
-  movements.forEach(function (move, index) {
-    const type = move > 0 ? `deposit` : `withdrawal`;
-    const html = `
-      <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
-      index + 1
-    } ${type}</div>
+// const displayMovements = function (movements) {
+//   containerMovements.innerHTML = '';
+//   movements.forEach(function (move, index) {
+//     const type = move > 0 ? `deposit` : `withdrawal`;
+//     const html = `
+//       <div class="movements__row">
+//         <div class="movements__type movements__type--${type}">${
+//       index + 1
+//     } ${type}</div>
 
-        <div class="movements__value">${move}€</div>
-      </div>
-    `;
-    containerMovements.insertAdjacentHTML(`afterbegin`, html);
-  });
-};
-displayMovements(account1.movements);
+//         <div class="movements__value">${move}€</div>
+//       </div>
+//     `;
+//     containerMovements.insertAdjacentHTML(`afterbegin`, html);
+//   });
+// };
+// displayMovements(account1.movements);
 
-const createUsernames = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map(name => name[0])
-      .join('');
-  });
-};
-createUsernames(accounts);
-console.log(accounts);
+// const createUsernames = function (accs) {
+//   accs.forEach(function (acc) {
+//     acc.username = acc.owner
+//       .toLowerCase()
+//       .split(' ')
+//       .map(name => name[0])
+//       .join('');
+//   });
+// };
+// createUsernames(accounts);
+
+// const calcDisplayBalance = function (movements) {
+//   const balance = movements.reduce((acc, currVal) => (acc += currVal), 0);
+//   labelBalance.textContent = `${balance} EUR`;
+// };
+// calcDisplayBalance(account1.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -276,3 +281,46 @@ const movementsDescriptions = movements.map((mov, i, arr) => {
 // );
 console.log(movementsDescriptions);
 */
+
+///////////////////////////////////////
+/* The filter Method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+console.log(movements);
+console.log(deposits);
+
+const withdrawal = movements.filter(mov => mov < 0);
+console.log(movements);
+console.log(withdrawal);
+*/
+
+///////////////////////////////////////
+// The reduce Method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// accumulator is like snowball effect
+// const balance = movements.reduce(function (acc, curr, i, arr) {
+//   acc += curr;
+//   return acc;
+// }, 0);
+const balance = movements.reduce((acc, curr) => (acc += curr), 0);
+
+console.log(balance);
+let total = 0;
+for (const num of movements) {
+  total += num;
+}
+console.log(total);
+
+// Maximun value
+const maxValue = movements.reduce(function (max, curr) {
+  if (max > curr) {
+    return max;
+  } else {
+    return curr;
+  }
+}, movements[0]);
+
+console.log(maxValue);
